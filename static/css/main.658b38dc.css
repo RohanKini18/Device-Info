@@ -1,12 +1,12 @@
 #device{
-    font-size: 30px;
+    font-size: 20px;
 }
 
 #battery{
-     font-size: 30px;
+     font-size: 20px;
 }
 #iplocation{
-     font-size: 30px;
+     font-size: 20px;
 }
 
 
@@ -15,7 +15,7 @@
     color: white;
     font-family: Calibri;
     text-decoration: none;
-    
+    font-weight: 550;
     
 }
 .rk{
