@@ -50,7 +50,7 @@ var deviceDetails = {
 var devContainer = document.getElementById('device');
 var devProps = [];
 for (var key in deviceDetails) {
-    devProps.push('<li>' + key + ': <b>' + (deviceDetails[key] ? deviceDetails[key].replace(/(<([^>]+)>)/gi, '') : '') + '</b></li>');
+    devProps.push('<li class="list-group-item bg-transparent border"  style="color: white;">' + key + ': <b>' + (deviceDetails[key] ? deviceDetails[key].replace(/(<([^>]+)>)/gi, '') : '') + '</b></li>');
 }
 devContainer.innerHTML = '<ul>' + devProps.join('') + '</ul>';
 
@@ -59,14 +59,14 @@ devContainer.innerHTML = '<ul>' + devProps.join('') + '</ul>';
 var ipLocContainer = document.getElementById('iplocation');
 var ipLocProps = [];
 if (locationFromUrl) {
-    ipLocProps.push('<li id="location">Location: <b>' + locationFromUrl.replace(/(<([^>]+)>)/gi, '') + '</b></li>');
+    ipLocProps.push('<li class="list-group-item bg-transparent border"  style="color: white;" id="location">Location: <b>' + locationFromUrl.replace(/(<([^>]+)>)/gi, '') + '</b></li>');
     ipLocContainer.innerHTML = '<ul>' + ipLocProps.join('') + '</ul>';
 } else {
     fetch('https://ipv4.myip.wtf/json').then(response => response.json()).then(function(data) {
         var location = data.YourFuckingLocation.split(',')[0] + ', ' + data.YourFuckingCountryCode;
-        ipLocProps.push('<li>IP Address: <b>' + data.YourFuckingIPAddress + '</b></li>');
-        ipLocProps.push('<li>ISP: <b>' + data.YourFuckingISP + '</b></li>');
-        ipLocProps.push('<li id="location">Location: <b>' + location + '</b></li>');
+        ipLocProps.push('<li class="list-group-item bg-transparent border"  style="color: white;">IP Address: <b>' + data.YourFuckingIPAddress + '</b></li>');
+        ipLocProps.push('<li class="list-group-item bg-transparent border"  style="color: white;">ISP: <b>' + data.YourFuckingISP + '</b></li>');
+        ipLocProps.push('<li class="list-group-item bg-transparent border"  style="color: white;" id="location">Location: <b>' + location + '</b></li>');
         ipLocContainer.innerHTML = '<ul>' + ipLocProps.join('') + '</ul>';
     });
 }
