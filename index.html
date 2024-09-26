@@ -99,13 +99,13 @@
           const animate = () => {
             if (i < totalSpeed) {
               document.querySelector(".content").innerHTML =
-                "Network speed:" + " " + i.toFixed(2) + "<b>Mbps</b>";
+                "<h3>Network speed:" + " " + i.toFixed(2) + "<b>Mbps</b></h3>";
               setTimeout(animate, 60);
               i += 1.02;
             } else {
               document.querySelector(".loader").style.display = "Loading";
               document.querySelector(".content").innerHTML =
-                "Network speed:" + " " + totalSpeed + "<b>Mbps</b>";
+                "<h3>Network speed:" + " " + totalSpeed + "<b>Mbps</b></h3>";
               
               document.querySelector(".btn").style.display = "";
             }
@@ -113,7 +113,7 @@
           animate();
 
           document.querySelector(".content").innerHTML =
-            "Network speed:" + " " + totalSpeed + "<b>Mbps</b>";
+            "<h3>Network speed:" + " " + totalSpeed + "<b>Mbps</b></h3>";
           document.querySelector(".loader-content").classList.add("result");
           e.target.innerText = "Check Again";
         };
