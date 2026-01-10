@@ -1,175 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="/favicon.png" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-  
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Device Info</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script defer="defer" src="/static/js/main.d2d72bf3.js"></script>
-    <link href="/static/css/main.658b38dc.css" rel="stylesheet" />
-  <meta itemprop="name" content="T Rohan Kini - Device Info - https://www.rohantkini.in/">
-  <meta itemprop="description" content="T Rohan Kini - Device Info - https://www.rohantkini.in/" />
-    <link rel="stylesheet" href="static/css/style.css" />
-  </head>
-  <body class="rk1">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
 
-<style>
-  .transparent-list {
-    background-color: rgba(255, 255, 255, 0.1); /* 10% white background */
-    backdrop-filter: blur(5px); /* Optional: adds blur effect to background */
-    border-radius: 8px; /* Rounded corners */
-    padding: 15px;
-    color: white; /* White text for better visibility on a transparent background */
+  <title>Device Info | T Rohan Kini</title>
+
+  <link rel="icon" href="/favicon.png" />
+
+  <meta itemprop="name" content="T Rohan Kini - Device Info" />
+  <meta
+    itemprop="description"
+    content="Advanced device diagnostics dashboard by T Rohan Kini."
+  />
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    crossorigin="anonymous"
+  />
+
+  <link href="/static/css/main.658b38dc.css" rel="stylesheet" />
+  <link href="/static/css/style.css" rel="stylesheet" />
+
+  <!-- seo -->
+
+<title>Advanced Device Info & Diagnostics | T Rohan Kini</title>
+
+<meta name="description"
+      content="Advanced device diagnostics dashboard by T Rohan Kini. View device info, IP, location, battery, network speed, hardware details, keyboard, mouse and system insights in real time." />
+
+<meta name="keywords"
+      content="device info, device diagnostics, browser information, IP location, internet speed test, system insights, hardware details, keyboard mouse tracker, web diagnostics tool" />
+
+<meta name="author" content="T Rohan Kini" />
+<meta name="robots" content="index, follow" />
+
+<link rel="canonical" href="https://www.rohantkini.in/device-info" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Advanced Device Info Dashboard",
+  "url": "https://www.rohantkini.in/device-info",
+  "author": {
+    "@type": "Person",
+    "name": "T Rohan Kini",
+    "url": "https://www.rohantkini.in"
+  },
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "All",
+  "description": "Real-time device diagnostics tool showing hardware, network, browser, and environment details."
 }
-.transparent-list li {
-    margin-bottom: 10px;
+</script>
+
+<!-- Open Graph / Meta -->
+<meta property="og:type" content="website" />
+<meta property="og:title"
+      content="Advanced Device Info & Diagnostics | T Rohan Kini" />
+<meta property="og:description"
+      content="Explore real-time device diagnostics including hardware, battery, IP, network speed, keyboard, mouse and system insights." />
+<meta property="og:url" content="https://www.rohantkini.in/device-info" />
+<meta property="og:image" content="https://www.rohantkini.in/assets/device-info-preview.png" />
+<meta property="og:site_name" content="T Rohan Kini" />
+
+
+
+<!-- X (Twitter) Cards -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title"
+      content="Advanced Device Info & Diagnostics | T Rohan Kini" />
+<meta name="twitter:description"
+      content="A powerful web-based device diagnostics tool showing real-time system, network and browser insights." />
+<meta name="twitter:image"
+      content="https://www.rohantkini.in/assets/device-info-preview.png" />
+<meta name="twitter:creator" content="@rohantkini" />
+
+
+  <style>
+    .section-title {
+      margin: 40px 0 20px;
+      font-weight: 600;
+    }
+
+    .activity-box {
+      background: rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 15px;
+      color: #fff;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body class="rk1">
+
+<div id="root"></div>
+
+<div class="container my-5">
+<main class="details text-center">
+
+<!-- ================= EXISTING CONTENT ================= -->
+
+<h2 class="section-title">Your <span class="rk">Device Info</span></h2>
+<div id="device"></div>
+
+<div id="battery" class="my-4">
+  <div class="d-flex justify-content-center">
+    <div id="cell"></div>
+  </div>
+  <div id="indicator" class="mt-5">
+    <img src="charge.png" alt="Charging indicator">
+  </div>
+</div>
+
+<h2 class="section-title">Your <span class="rk">IP & Location</span></h2>
+<div id="iplocation"></div>
+
+<div class="loader-widget my-4">
+  <div class="loader-content">
+    <div class="content"></div>
+  </div>
+  <div class="loader d-none"></div>
+  <button class="btn btn-primary speed-btn">Check Internet Speed</button>
+</div>
+
+<h2 class="section-title">Your <span class="rk">Keyboard Activity</span></h2>
+<div class="activity-box mx-auto" style="max-width:420px;">
+  <p>Pressed Key: <span class="rk" id="keyName">—</span></p>
+  <p>Key Code: <span class="rk" id="keyCode">—</span></p>
+  <p>Modifiers: <span class="rk" id="modifiers">—</span></p>
+  <p>Last Keys: <span class="rk" id="keyHistory">—</span></p>
+</div>
+
+<h2 class="section-title">Your <span class="rk">Mouse Activity</span></h2>
+<div class="activity-box mx-auto" style="max-width:420px;">
+  <p>Position: <span class="rk" id="mousePos">X: 0 , Y: 0</span></p>
+  <p>Last Click: <span class="rk" id="mouseClick">—</span></p>
+</div>
+
+<h2 class="section-title">Page <span class="rk">Status</span></h2>
+<div class="activity-box mx-auto" style="max-width:420px;">
+  <p>Visibility: <span class="rk" id="pageStatus">Active</span></p>
+</div>
+
+<h2 class="section-title">Clipboard <span class="rk">Activity</span></h2>
+<div class="activity-box mx-auto" style="max-width:420px;">
+  <p>Last Action: <span class="rk" id="clipboardStatus">—</span></p>
+</div>
+
+<!-- ================= NEW FEATURES (HTML-2) ================= -->
+
+<h2 class="section-title">System <span class="rk">Insights</span></h2>
+<div class="activity-box mx-auto" style="max-width:420px;">
+  <p>Date & Time: <span class="rk" id="liveTime">—</span></p>
+  <p>Network Type: <span class="rk" id="networkType">—</span></p>
+  <p>Touch Support: <span class="rk" id="touchSupport">—</span></p>
+  <p>Orientation: <span class="rk" id="orientation">—</span></p>
+</div>
+
+<h2 class="section-title">Hardware <span class="rk">Details</span></h2>
+<div class="activity-box mx-auto" style="max-width:420px;">
+  <p>CPU Cores: <span class="rk" id="cpuCores">—</span></p>
+  <p>Device Memory: <span class="rk" id="deviceMemory">—</span></p>
+  <p>Screen Resolution: <span class="rk" id="screenRes">—</span></p>
+  <p>Pixel Ratio: <span class="rk" id="pixelRatio">—</span></p>
+</div>
+
+<h2 class="section-title">Environment <span class="rk">Info</span></h2>
+<div class="activity-box mx-auto" style="max-width:420px;">
+  <p>Browser Language: <span class="rk" id="browserLang">—</span></p>
+  <p>Volume Control Support: <span class="rk" id="volumeSupport">—</span></p>
+  <p>Charging Status: <span class="rk" id="chargingStatus">—</span></p>
+</div>
+
+</main>
+</div>
+
+<footer class="bg-dark text-center text-white">
+  <div class="p-3" style="background-color: rgba(0,0,0,0.5);">
+    Copywrite © 2026 :
+    <a class="text-white" href="https://www.rohantkini.in/">T Rohan Kini</a>
+  </div>
+</footer>
+
+<!-- ================= SCRIPTS ================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@1.0.2/src/ua-parser.min.js"></script>
+
+<script defer src="/static/js/main.d2d72bf3.js"></script>
+<script type="module" src="main1.js"></script>
+<script type="module" src="main2.js"></script>
+
+<script>
+/* Speed Test */
+document.querySelector(".speed-btn").addEventListener("click", () => {
+  const img = new Image();
+  const start = Date.now();
+  img.src = "https://upload.wikimedia.org/wikipedia/commons/3/3e/Tokyo_Sky_Tree_2012.JPG?" + start;
+  img.onload = () => {
+    const speed = (((8185374 * 8) / ((Date.now() - start)/1000)) / 1024 / 1024).toFixed(2);
+    document.querySelector(".content").innerHTML = `<h3>${speed} Mbps</h3>`;
+  };
+});
+
+/* Keyboard */
+const history = [];
+document.addEventListener("keydown", e => {
+  keyName.innerText = e.key === " " ? "Space" : e.key;
+  keyCode.innerText = e.keyCode;
+  const mods = [];
+  if (e.ctrlKey) mods.push("Ctrl");
+  if (e.shiftKey) mods.push("Shift");
+  if (e.altKey) mods.push("Alt");
+  modifiers.innerText = mods.length ? mods.join("+") : "None";
+  history.unshift(e.key);
+  if (history.length > 5) history.pop();
+  keyHistory.innerText = history.join(", ");
+});
+
+/* Mouse */
+document.addEventListener("mousemove", e => mousePos.innerText = `X: ${e.clientX} , Y: ${e.clientY}`);
+document.addEventListener("mousedown", e => mouseClick.innerText = ["Left","Middle","Right"][e.button] + " Click");
+
+/* Page Visibility */
+document.addEventListener("visibilitychange", () =>
+  pageStatus.innerText = document.hidden ? "Inactive" : "Active"
+);
+
+/* Clipboard */
+["copy","cut","paste"].forEach(evt =>
+  document.addEventListener(evt, () => clipboardStatus.innerText = evt.charAt(0).toUpperCase()+evt.slice(1))
+);
+
+/* System Insights */
+setInterval(() => liveTime.innerText = new Date().toLocaleString(), 1000);
+networkType.innerText = (navigator.connection || {}).effectiveType || "Unknown";
+touchSupport.innerText = ("ontouchstart" in window) ? "Supported" : "Not Supported";
+function updateOrientation(){orientation.innerText = innerWidth > innerHeight ? "Landscape" : "Portrait";}
+addEventListener("resize", updateOrientation); updateOrientation();
+cpuCores.innerText = navigator.hardwareConcurrency || "Unknown";
+deviceMemory.innerText = navigator.deviceMemory ? navigator.deviceMemory + " GB" : "Unknown";
+screenRes.innerText = `${screen.width} x ${screen.height}`;
+pixelRatio.innerText = devicePixelRatio;
+browserLang.innerText = navigator.language;
+volumeSupport.innerText = ("AudioContext" in window) ? "Supported" : "Not Supported";
+
+/* Battery */
+if (navigator.getBattery) {
+  navigator.getBattery().then(b =>
+    chargingStatus.innerText = b.charging ? "Charging" : "Not Charging"
+  );
 }
-</style>
+</script>
 
-    <div id="root"></div>
-
-    <div class="container">
-      <main>
-       
-
-        <div class="details">
-          <br />
-          <br />
-          <h2>Your <p class="rk">Device Info</p></h2>
-          <div id="device"></div>
-<br>
-<br>
-          <!-- rk9 -->
-          <div id="battery">
-           
-           
-            <center><div id="cell" height="100%"></div></center>
-            <div id="indicator"><br><br><img src="charge.png"></div>
-          </div>
-          <!-- rk10 -->
-<br>
-<br>
-          <h2>Your <p class="rk">IP &amp; Location</p></h2>
-          <div id="iplocation"></div>
-          <div class="container">
-            <div class="loader-widget">
-              <div class="loader-content">
-                <div class="content"></div>
-              </div>
-              <div class="loader" style="display: none"></div>
-              <button class="btn btn-primary" type="button">Check Internet Speed</button>
-            </div>
-            <br><br>
-          </div>
-        </div>
-      </main>
-      <footer></footer>
-    </div>
-    <!-- rk1 -->
-    <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@1.0.2/src/ua-parser.min.js"></script>
-    <script type="module" src="main1.js"></script>
-    <script type="module" src="main2.js"></script>
-
-    <script>
-      document.querySelector("button").addEventListener("click", (e) => {
-        var imageLink =
-            "https://upload.wikimedia.org/wikipedia/commons/3/3e/Tokyo_Sky_Tree_2012.JPG",
-          downloadSize = 8185374,
-          time_start,
-          time_end,
-          downloadSrc = new Image();
-        time_start = new Date().getTime();
-        var cacheImg = "?nn=" + time_start;
-        downloadSrc.src = imageLink + cacheImg;
-        downloadSrc.onload = function () {
-          time_end = new Date().getTime();
-          var timeDuration = (time_end - time_start) / 1000;
-          (loadedBytes = downloadSize * 8),
-            (totalSpeed = (loadedBytes / timeDuration / 1024 / 1024).toFixed(
-              2
-            ));
-          let i = 0,
-            speedOut;
-          document.querySelector(".loader").style.display = "";
-          document.querySelector(".btn").style.display = "none";
-          const animate = () => {
-            if (i < totalSpeed) {
-              document.querySelector(".content").innerHTML =
-                "<h3>Network speed:" + " " + i.toFixed(2) + "<b>Mbps</b></h3>";
-              setTimeout(animate, 60);
-              i += 1.02;
-            } else {
-              document.querySelector(".loader").style.display = "Loading";
-              document.querySelector(".content").innerHTML =
-                "<h3>Network speed:" + " " + totalSpeed + "<b>Mbps</b></h3>";
-              
-              document.querySelector(".btn").style.display = "";
-            }
-          };
-          animate();
-
-          document.querySelector(".content").innerHTML =
-            "<h3>Network speed:" + " " + totalSpeed + "<b>Mbps</b></h3>";
-          document.querySelector(".loader-content").classList.add("result");
-          e.target.innerText = "Check Again";
-        };
-      });
-    </script>
-
-    <!-- rk7 -->
-
-    <script type="text/javascript">
-      (function (m, e, t, r, i, k, a) {
-        m[i] =
-          m[i] ||
-          function () {
-            (m[i].a = m[i].a || []).push(arguments);
-          };
-        m[i].l = 1 * new Date();
-        (k = e.createElement(t)),
-          (a = e.getElementsByTagName(t)[0]),
-          (k.async = 1),
-          (k.src = r),
-          a.parentNode.insertBefore(k, a);
-      })(
-        window,
-        document,
-        "script",
-        "https://cdn.jsdelivr.net/npm/yandex-metrica-watch/tag.js",
-        "ym"
-      );
-      ym(87657634, "init", {
-        clickmap: false,
-        trackLinks: true,
-        accurateTrackBounce: false,
-        trackHash: true,
-      });
-    </script>
-    <noscript
-      ><div>
-        <img
-          src="https://mc.yandex.ru/watch/87657634"
-          style="position: absolute; left: -9999px"
-          alt="" 
-        /></div
-    ></noscript>
-  
-    
-  <footer class="bg-dark text-center text-white">
-    <!-- Grid container -->
- 
-    <!-- Grid container -->
-  
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.5);">
-      © 2024 Copyright:
-      <a class="text-white" href="https://www.rohantkini.in/">T Rohan Kini</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
-  </body>
+</body>
 </html>

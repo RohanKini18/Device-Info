@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+
+  <title>Device Info | T Rohan Kini</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.png" />
+
+  <!-- SEO -->
+  <meta itemprop="name" content="T Rohan Kini - Device Info" />
+  <meta
+    itemprop="description"
+    content="View device details, battery status, IP address, location, internet speed, and keyboard activity."
+  />
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+
+  <!-- App styles -->
+  <link href="/static/css/main.658b38dc.css" rel="stylesheet" />
+  <link href="/static/css/style.css" rel="stylesheet" />
+
+  <!-- Custom UI -->
+  <style>
+    .transparent-list {
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      border-radius: 8px;
+      padding: 15px;
+      color: #fff;
+    }
+
+    .transparent-list li {
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      margin: 40px 0 20px;
+      font-weight: 600;
+    }
+
+    .key-box {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(6px);
+      border-radius: 10px;
+      padding: 20px;
+      color: #fff;
+      font-size: 1.2rem;
+    }
+
+    .key-value {
+      font-weight: 600;
+      color: #0d6efd;
+    }
+  </style>
+</head>
+
+<body class="rk1">
+
+  <!-- React root -->
+  <div id="root"></div>
+
+  <div class="container my-5">
+    <main class="details text-center">
+
+      <!-- Device Info -->
+      <h2 class="section-title">
+        Your <span class="rk">Device Info</span>
+      </h2>
+      <div id="device"></div>
+
+      <!-- Battery -->
+      <div id="battery" class="my-4">
+        <div class="d-flex justify-content-center">
+          <div id="cell"></div>
+        </div>
+        <div id="indicator" class="mt-5">
+          <img src="charge.png" alt="Charging indicator">
+        </div>
+      </div>
+
+      <!-- IP & Location -->
+      <h2 class="section-title">
+        Your <span class="rk">IP &amp; Location</span>
+      </h2>
+      <div id="iplocation"></div>
+
+      <!-- Speed Test -->
+      <div class="loader-widget my-4">
+        <div class="loader-content">
+          <div class="content"></div>
+        </div>
+
+        <div class="loader d-none"></div>
+
+        <button class="btn btn-primary speed-btn" type="button">
+          Check Internet Speed
+        </button>
+      </div>
+
+      <!-- Keyboard Detection -->
+      <h2 class="section-title">
+        Your <span class="rk">Keyboard Activity</span>
+      </h2>
+
+      <div class="key-box mx-auto" style="max-width: 420px;">
+        <p>Pressed Key: <span class="rk" id="keyName">—</span></p>
+        <p>Key Code: <span class="rk" id="keyCode">—</span></p>
+        <p>Modifiers:
+          <span class="rk" id="modifiers">—</span>
+        </p>
+        <small class="text-light opacity-75">
+          Press any key on your keyboard
+        </small>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-center text-white">
+    <div class="p-3" style="background-color: rgba(0,0,0,0.5);">
+      © 2024
+      <a class="text-white" href="https://www.rohantkini.in/">
+        T Rohan Kini
+      </a>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@1.0.2/src/ua-parser.min.js"></script>
+
+  <script defer src="/static/js/main.d2d72bf3.js"></script>
+  <script type="module" src="main1.js"></script>
+  <script type="module" src="main2.js"></script>
+
+  <!-- Internet Speed Test (unchanged) -->
+  <script>
+    const speedBtn = document.querySelector(".speed-btn");
+
+    speedBtn.addEventListener("click", () => {
+      const imageLink =
+        "https://upload.wikimedia.org/wikipedia/commons/3/3e/Tokyo_Sky_Tree_2012.JPG";
+      const downloadSize = 8185374;
+
+      const startTime = Date.now();
+      const img = new Image();
+      img.src = imageLink + "?cache=" + startTime;
+
+      img.onload = () => {
+        const duration = (Date.now() - startTime) / 1000;
+        const speedMbps = (
+          (downloadSize * 8) / duration / 1024 / 1024
+        ).toFixed(2);
+
+        document.querySelector(".content").innerHTML =
+          `<h3>Network speed: ${speedMbps} <b>Mbps</b></h3>`;
+
+        speedBtn.innerText = "Check Again";
+      };
+    });
+  </script>
+
+  <!-- Keyboard Detection Script -->
+  <script>
+    document.addEventListener("keydown", (e) => {
+      document.getElementById("keyName").innerText =
+        e.key === " " ? "Space" : e.key;
+
+      document.getElementById("keyCode").innerText = e.keyCode;
+
+      let mods = [];
+      if (e.ctrlKey) mods.push("Ctrl");
+      if (e.shiftKey) mods.push("Shift");
+      if (e.altKey) mods.push("Alt");
+
+      document.getElementById("modifiers").innerText =
+        mods.length ? mods.join(" + ") : "None";
+    });
+  </script>
+
+  <!-- Yandex Analytics -->
+  <script>
+    (function (m, e, t, r, i, k, a) {
+      m[i] = m[i] || function () {
+        (m[i].a = m[i].a || []).push(arguments);
+      };
+      m[i].l = 1 * new Date();
+      k = e.createElement(t);
+      a = e.getElementsByTagName(t)[0];
+      k.async = 1;
+      k.src = r;
+      a.parentNode.insertBefore(k, a);
+    })(window, document, "script",
+      "https://cdn.jsdelivr.net/npm/yandex-metrica-watch/tag.js", "ym");
+
+    ym(87657634, "init", {
+      clickmap: false,
+      trackLinks: true,
+      accurateTrackBounce: false,
+      trackHash: true,
+    });
+  </script>
+
+  <noscript>
+    <img
+      src="https://mc.yandex.ru/watch/87657634"
+      style="position:absolute; left:-9999px"
+      alt=""
+    />
+  </noscript>
+
+</body>
+</html>
